@@ -72,10 +72,14 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
     }
 
     public void initComponentes() {
+        
+        // inicio la incidencia actual que se mostrara en la ventana
+        actual = incidencias.get(0);
         // creo la ventana principal
         ventanaAsignacion = new JFrame("Panel de asignacion de incidencias");
         //ventanaAsignacion.setLocationRelativeTo(null);
         ventanaAsignacion.setVisible(true); // hacemos visible la ventana
+        ventanaAsignacion.setDefaultCloseOperation(EXIT_ON_CLOSE);
         ventanaAsignacion.setSize(900, 500);
         //ventanaAsignacion.setBounds(100, 100, 677, 497);
         //ventanaAsignacion.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -124,6 +128,7 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
         txtDescripcion.setEditable(false);
         txtDescripcion.setFont(new Font("Tahoma", Font.PLAIN, 10));
         txtDescripcion.setColumns(15);
+        //txtDescripcion.setText(actual.getDescripcion());  --debo establecer aqui? u en otro sitio
 
         // Fecha de creacion
 
@@ -186,26 +191,26 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
         
         
         // Disponemos los controles en el panel de la ventana
-        this.getContentPane().setLayout(new FlowLayout());
-        this.getContentPane().add(lbIncidencias);
-        this.getContentPane().add(cbIncidencias);
-        this.getContentPane().add(lbTecnicos);
-        this.getContentPane().add(cbTecnicos);
-        this.getContentPane().add(lbinfoIncidencia);
-        this.getContentPane().add(btInformes);
-        this.getContentPane().add(lbDescripcion);
-        this.getContentPane().add(txtDescripcion);
-        this.getContentPane().add(lbFechaCreacion);
-        this.getContentPane().add(txtFechaCreacion);
-        this.getContentPane().add(lbtecnico);
-        this.getContentPane().add(txtTecnico);
-        this.getContentPane().add(lbEstado);
-        this.getContentPane().add(txtEstado);
-        this.getContentPane().add(lbTiempoResolucion);
-        this.getContentPane().add(txtTiempoResolucion);
-        this.getContentPane().add(btActualizar);
-        this.getContentPane().add(btAsignar);
-        this.getContentPane().add(btCancelar);
+        ventanaAsignacion.getContentPane().setLayout(new FlowLayout());
+        ventanaAsignacion.getContentPane().add(lbIncidencias);
+        ventanaAsignacion.getContentPane().add(cbIncidencias);
+        ventanaAsignacion.getContentPane().add(lbTecnicos);
+        ventanaAsignacion.getContentPane().add(cbTecnicos);
+        ventanaAsignacion.getContentPane().add(lbinfoIncidencia);
+        ventanaAsignacion.getContentPane().add(btInformes);
+        ventanaAsignacion.getContentPane().add(lbDescripcion);
+        ventanaAsignacion.getContentPane().add(txtDescripcion);
+        ventanaAsignacion.getContentPane().add(lbFechaCreacion);
+        ventanaAsignacion.getContentPane().add(txtFechaCreacion);
+        ventanaAsignacion.getContentPane().add(lbtecnico);
+        ventanaAsignacion.getContentPane().add(txtTecnico);
+        ventanaAsignacion.getContentPane().add(lbEstado);
+        ventanaAsignacion.getContentPane().add(txtEstado);
+        ventanaAsignacion.getContentPane().add(lbTiempoResolucion);
+        ventanaAsignacion.getContentPane().add(txtTiempoResolucion);
+        ventanaAsignacion.getContentPane().add(btActualizar);
+        ventanaAsignacion.getContentPane().add(btAsignar);
+        ventanaAsignacion.getContentPane().add(btCancelar);
 
         // Aqui se añaden los manejadores de eventos a los controles
         cbIncidencias.addActionListener(this);

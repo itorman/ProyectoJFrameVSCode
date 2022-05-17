@@ -46,8 +46,10 @@ public class VentanaInforme extends JFrame implements ActionListener {
     public void initComponentes() {
 
         ventanaInforme = new JFrame("Panel de informes");
+
         // inicializo ventana y configuro tamaño
         ventanaInforme.setVisible(true); // hacemos visible la ventana
+        //ventanaInforme.setDefaultCloseOperation(EXIT_ON_CLOSE); // ?? aqui ??
         ventanaInforme.setSize(700, 400);
         // Posicionamos la ventana en la pantalla
         ventanaInforme.setLocationRelativeTo(null);
