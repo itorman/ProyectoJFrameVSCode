@@ -49,6 +49,10 @@ public class VentanaInforme extends JFrame implements ActionListener {
         // inicializo ventana y configuro tamaño
         ventanaInforme.setVisible(true); // hacemos visible la ventana
         ventanaInforme.setSize(700, 400);
+        // Posicionamos la ventana en la pantalla
+        ventanaInforme.setLocationRelativeTo(null);
+        
+        
 
         // Creación de controles gráficos
         titulo = new JLabel("Informes");
@@ -98,31 +102,26 @@ public class VentanaInforme extends JFrame implements ActionListener {
 
         btCerrar = new JButton("Cerrar");
         btCerrar.setFont(new Font("Tahoma", Font.BOLD, 15));
-        btCerrar.addActionListener(this);       
-
+        // asignamos el listener para el botón
+        btCerrar.addActionListener(this);
         
-        // Dimensionamos la ventana principal
-        this.setSize(500, 200);
-        // Posicionamos la ventana en la pantalla
-        this.setLocationRelativeTo(null);
-        // Hacemos que la ventana sea visible
-        this.setVisible(true);
-
-
         // Disponemos los controles en el panel de la ventana
-        this.getContentPane().setLayout(new FlowLayout());
-        this.getContentPane().add(titulo);
-        this.getContentPane().add(incidenciasCerradas);
-        this.getContentPane().add(incidenciasAbiertas);
-        this.getContentPane().add(incidenciasEnProgreso);
-        this.getContentPane().add(tiempoMedioResolucion);
-        this.getContentPane().add(tecnicoMas);
-        this.getContentPane().add(tecnicoMenos);
-        this.getContentPane().add(cerrar);
-
-        // Aqui se añaden los manejadores de eventos a los controles
-        cerrar.addActionListener(this);
-        
+        ventanaInforme.getContentPane().setLayout(new FlowLayout());
+        ventanaInforme.getContentPane().add(titulo);
+        ventanaInforme.getContentPane().add(lbIncidenciasCerradas);
+        ventanaInforme.getContentPane().add(txtIncidenciasCerradas);
+        ventanaInforme.getContentPane().add(lbIncidenciasAbiertas);
+        ventanaInforme.getContentPane().add(txtIncidenciasAbiertas);
+        ventanaInforme.getContentPane().add(lbIncidenciasEnProgreso);
+        ventanaInforme.getContentPane().add(txtIncidenciasEnProgreso);
+        ventanaInforme.getContentPane().add(lbTiempoMedioResolucion);
+        ventanaInforme.getContentPane().add(txtTiempoMedioResolucion);
+        ventanaInforme.getContentPane().add(lbTecnicoMasActivo);
+        ventanaInforme.getContentPane().add(txtTecnicoMasActivo);
+        ventanaInforme.getContentPane().add(lbTecnicoMasInactivo);
+        ventanaInforme.getContentPane().add(txtTecnicoMasInactivo);
+        ventanaInforme.getContentPane().add(btCerrar);
+    
     }
     // FIN DEL CONSTRUCTOR
 
