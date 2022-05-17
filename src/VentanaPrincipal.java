@@ -183,7 +183,8 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
         //añado el listener al boton cancelar
         btCancelar.addActionListener(this);       
        
-
+        
+        
         // Disponemos los controles en el panel de la ventana
         this.getContentPane().setLayout(new FlowLayout());
         this.getContentPane().add(lbIncidencias);
