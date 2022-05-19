@@ -61,17 +61,18 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
         tecnicos.add(tecnico1);
         tecnicos.add(tecnico2);
         //anado las incidencias al array de incidencias a la vez que las creo
-        incidencias.add(new Incidencia("IC001", "Problema aplicacion Outlook", "02/03/2020", "En progreso", tecnico1));
-        incidencias.add(new Incidencia("IC002", "Problema en disco", "07/04/2021", "En progreso", tecnico1));
-        incidencias.add(new Incidencia("IC003", "Problema en Sharepoint", "07/04/2021", "En progreso", tecnico1));
-        incidencias.add(new Incidencia("IC004", "Problema en Sharepoint", "08/04/2021", "Cerrada", tecnico2));
-        incidencias.add(new Incidencia("IC005", "Problema en Adobe", "07/04/2021", "Abierta", null));
+        incidencias.add(new Incidencia("IC001", "Problema aplicacion Outlook", "02/03/2020", "En progreso", tecnico1, 0));
+        incidencias.add(new Incidencia("IC002", "Problema en disco", "07/04/2021", "En progreso", tecnico1, 0));
+        incidencias.add(new Incidencia("IC003", "Problema en Sharepoint", "07/04/2021", "Cerrada", tecnico1, 120));
+        incidencias.add(new Incidencia("IC004", "Problema en Sharepoint", "08/04/2021", "Abierta", null, 0));
+        incidencias.add(new Incidencia("IC005", "Problema en Adobe", "07/04/2021", "Abierta", null, 0));
 
         // inicializo con un metodo propio llamado init. este seria parte del constructor
         initComponentes();
     }
 
     public void initComponentes() {
+        
         
         // inicio la incidencia actual que se mostrara en la ventana
         actual = incidencias.get(0);
@@ -228,12 +229,12 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-       // La propia ventana es el manejador de los eventos que se generan en sus controles
-		Object o= e.getSource();
-		
-		if(o.equals(cbIncidencias)){			
-			System.out.println("Selecciono incidencia");
-			
+        // La propia ventana es el manejador de los eventos que se generan en sus controles
+        Object o = e.getSource();
+
+        if (o.equals(cbIncidencias)) {
+            System.out.println("Selecciono incidencia");
+
         } else if (o.equals(cbTecnicos)) {
             System.out.println("Selecciono tecnico");
 
@@ -242,24 +243,25 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 
         } else if (o.equals(txtEstado)) {
             System.out.println("Actualizo");
-            
+
         } else if (o.equals(txtTiempoResolucion)) {
             System.out.println("Asigno tecnico");
-            
+
         } else if (o.equals(btActualizar)) {
             System.out.println("Actualizo");
 
         } else if (o.equals(btAsignar)) {
             System.out.println("Asigno");
-        
+
         } else if (o.equals(btCancelar)) {
             System.out.println("Cancelo");
-            
+
         } else {
             System.out.println("Error de algun tipo");
         }
-		
+
     }
+    
 }
 
 

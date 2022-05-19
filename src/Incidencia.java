@@ -20,12 +20,13 @@ public class Incidencia {
     //No inicializo cierre porque no se sabe la fecha de cierre
     //Inicializo estado a abierto por defecto
     //No inicializo tiempo de resolución porque no se sabe el tiempo de resolución
-    public Incidencia(String id, String descripcion, String fechaCreacion, String estado, Tecnico tecnico) {
+    public Incidencia(String id, String descripcion, String fechaCreacion, String estado, Tecnico tecnico, int tiempoResolucion) {
         this.id = id;
         this.descripcion = descripcion;
         this.fechaCreacion = fechaCreacion;
         this.estado = estado;
         this.tecnico = tecnico;
+        this.tiempoResolucion = tiempoResolucion;
     }
 
     /**
