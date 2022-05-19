@@ -17,7 +17,7 @@ import java.awt.Font;
 public class VentanaPrincipal extends JFrame implements ActionListener {
     
     //atributos
-    private JFrame ventanaAsignacion;
+    //private JFrame ventanaAsignacion; // hace falta esto???
     private JTextField txtDescripcion;
     private JTextField txtFechaCreacion;
     private Incidencia actual;
@@ -52,8 +52,9 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
     
 
     // constructorque crea la ventana principal
-    public void VentanaPrincipal() {
+    public VentanaPrincipal() {
 
+        super("Ventana asignacion de incidencias");
         //creo los tecnicos
         Tecnico tecnico1 = new Tecnico("Andres Quiron Perez", "NIVEL 1");
         Tecnico tecnico2 = new Tecnico("Alberto Jimenez Garcia", "NIVEL 2");
@@ -77,11 +78,10 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
         // inicio la incidencia actual que se mostrara en la ventana
         actual = incidencias.get(0);
         // creo la ventana principal
-        ventanaAsignacion = new JFrame("Panel de asignacion de incidencias");
-        //ventanaAsignacion.setLocationRelativeTo(null);
-        ventanaAsignacion.setVisible(true); // hacemos visible la ventana
-        ventanaAsignacion.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        ventanaAsignacion.setSize(900, 500);
+        //ventanaAsignacion = new JFrame("Panel de asignacion de incidencias");
+        //ventanaAsignacion.setLocationRelativeTo(null);setVisible(true); // hacemos visible la ventana
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.setSize(900, 500);
         //ventanaAsignacion.setBounds(100, 100, 677, 497);
         //ventanaAsignacion.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
@@ -89,6 +89,7 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
         // Incidencias
         lbIncidencias = new JLabel("Incidencias");
         lbIncidencias.setFont(new Font("Tahoma", Font.BOLD, 14));
+       
         cbIncidencias = new JComboBox<String>();
         cbIncidencias.setFont(new Font("Tahoma", Font.PLAIN, 10));
         cbIncidencias.addItem("Seleccione una incidencia");
@@ -168,6 +169,7 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
         txtTiempoResolucion = new JTextField();
         txtTiempoResolucion.setEditable(true);
         txtTiempoResolucion.setFont(new Font("Tahoma", Font.PLAIN, 10));
+        txtTiempoResolucion.setColumns(5);
         // Añado el listener 
         txtTiempoResolucion.addActionListener(this);
 
@@ -192,27 +194,29 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
         
         
         // Disponemos los controles en el panel de la ventana
-        ventanaAsignacion.getContentPane().setLayout(new FlowLayout());
-        ventanaAsignacion.getContentPane().add(lbIncidencias);
-        ventanaAsignacion.getContentPane().add(cbIncidencias);
-        ventanaAsignacion.getContentPane().add(lbTecnicos);
-        ventanaAsignacion.getContentPane().add(cbTecnicos);
-        ventanaAsignacion.getContentPane().add(lbinfoIncidencia);
-        ventanaAsignacion.getContentPane().add(btInformes);
-        ventanaAsignacion.getContentPane().add(lbDescripcion);
-        ventanaAsignacion.getContentPane().add(txtDescripcion);
-        ventanaAsignacion.getContentPane().add(lbFechaCreacion);
-        ventanaAsignacion.getContentPane().add(txtFechaCreacion);
-        ventanaAsignacion.getContentPane().add(lbtecnico);
-        ventanaAsignacion.getContentPane().add(txtTecnico);
-        ventanaAsignacion.getContentPane().add(lbEstado);
-        ventanaAsignacion.getContentPane().add(txtEstado);
-        ventanaAsignacion.getContentPane().add(lbTiempoResolucion);
-        ventanaAsignacion.getContentPane().add(txtTiempoResolucion);
-        ventanaAsignacion.getContentPane().add(btActualizar);
-        ventanaAsignacion.getContentPane().add(btAsignar);
-        ventanaAsignacion.getContentPane().add(btCancelar);
+        this.getContentPane().setLayout(new FlowLayout());
+        this.getContentPane().add(lbIncidencias);
+        this.getContentPane().add(cbIncidencias);
+        this.getContentPane().add(lbTecnicos);
+        this.getContentPane().add(cbTecnicos);
+        this.getContentPane().add(lbinfoIncidencia);
+        this.getContentPane().add(btInformes);
+        this.getContentPane().add(lbDescripcion);
+        this.getContentPane().add(txtDescripcion);
+        this.getContentPane().add(lbFechaCreacion);
+        this.getContentPane().add(txtFechaCreacion);
+        this.getContentPane().add(lbtecnico);
+        this.getContentPane().add(txtTecnico);
+        this.getContentPane().add(lbEstado);
+        this.getContentPane().add(txtEstado);
+        this.getContentPane().add(lbTiempoResolucion);
+        this.getContentPane().add(txtTiempoResolucion);
+        this.getContentPane().add(btActualizar);
+        this.getContentPane().add(btAsignar);
+        this.getContentPane().add(btCancelar);
 
+        this.setVisible(true);
+        
         // Aqui se añaden los manejadores de eventos a los controles
         cbIncidencias.addActionListener(this);
         cbTecnicos.addActionListener(this);
@@ -263,7 +267,3 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
     }
     
 }
-
-
-
-   

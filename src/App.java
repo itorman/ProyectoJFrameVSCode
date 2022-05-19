@@ -16,9 +16,6 @@ public class App {
 
     // create a test class for the Incidencia and Tecnico classes
     public static void main(String[] args) {
-       // create a new instance of the Incidencia class
-       
-       
         //create a new instance of the Tecnico class
         Tecnico tecnico = new Tecnico("Luis Perez", "N1");
         // create a new instance of the Tecnico class

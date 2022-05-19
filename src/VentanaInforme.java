@@ -12,8 +12,9 @@ import java.awt.Font;
 public class VentanaInforme extends JFrame implements ActionListener {
     
     //atributos
-    private JFrame ventanaInforme;
-     // incidencias y tecnicos pasados desde ventana principal
+    //private JFrame ventanaInforme;
+    // incidencias y tecnicos pasados desde ventana principal
+    private VentanaPrincipal ventanaPrincipal;
     ArrayList<Tecnico> tecnicos = new ArrayList<Tecnico>();	
     ArrayList<Incidencia> incidencias = new ArrayList<Incidencia>();
 
@@ -37,22 +38,22 @@ public class VentanaInforme extends JFrame implements ActionListener {
     private JButton btCerrar;
 
     // constructorque crea la ventana de informes
-    public void VentanaInformes() {
+    public VentanaInforme() {
         //super("Aplicacion para asignación de incidencias a tecnicos");  --> no es necesario
-        super.setTitle("Panel de informes");       
+        super("Ventana de informes");       
         initComponentes();
     }
 
     public void initComponentes() {
 
-        ventanaInforme = new JFrame("Panel de informes");
+        //ventanaInforme = new JFrame("Panel de informes");
 
         // inicializo ventana y configuro tamaño
-        ventanaInforme.setVisible(true); // hacemos visible la ventana
-        //ventanaInforme.setDefaultCloseOperation(EXIT_ON_CLOSE); // ?? aqui ??
-        ventanaInforme.setSize(700, 400);
+       
+        //this.setDefaultCloseOperation(EXIT_ON_CLOSE); // ?? aqui ??
+        this.setSize(700, 400);
         // Posicionamos la ventana en la pantalla
-        ventanaInforme.setLocationRelativeTo(null);
+        this.setLocationRelativeTo(null);
         
         
 
@@ -108,21 +109,23 @@ public class VentanaInforme extends JFrame implements ActionListener {
         btCerrar.addActionListener(this);
         
         // Disponemos los controles en el panel de la ventana
-        ventanaInforme.getContentPane().setLayout(new FlowLayout());
-        ventanaInforme.getContentPane().add(titulo);
-        ventanaInforme.getContentPane().add(lbIncidenciasCerradas);
-        ventanaInforme.getContentPane().add(txtIncidenciasCerradas);
-        ventanaInforme.getContentPane().add(lbIncidenciasAbiertas);
-        ventanaInforme.getContentPane().add(txtIncidenciasAbiertas);
-        ventanaInforme.getContentPane().add(lbIncidenciasEnProgreso);
-        ventanaInforme.getContentPane().add(txtIncidenciasEnProgreso);
-        ventanaInforme.getContentPane().add(lbTiempoMedioResolucion);
-        ventanaInforme.getContentPane().add(txtTiempoMedioResolucion);
-        ventanaInforme.getContentPane().add(lbTecnicoMasActivo);
-        ventanaInforme.getContentPane().add(txtTecnicoMasActivo);
-        ventanaInforme.getContentPane().add(lbTecnicoMasInactivo);
-        ventanaInforme.getContentPane().add(txtTecnicoMasInactivo);
-        ventanaInforme.getContentPane().add(btCerrar);
+        this.getContentPane().setLayout(new FlowLayout());
+        this.getContentPane().add(titulo);
+        this.getContentPane().add(lbIncidenciasCerradas);
+        this.getContentPane().add(txtIncidenciasCerradas);
+        this.getContentPane().add(lbIncidenciasAbiertas);
+        this.getContentPane().add(txtIncidenciasAbiertas);
+        this.getContentPane().add(lbIncidenciasEnProgreso);
+        this.getContentPane().add(txtIncidenciasEnProgreso);
+        this.getContentPane().add(lbTiempoMedioResolucion);
+        this.getContentPane().add(txtTiempoMedioResolucion);
+        this.getContentPane().add(lbTecnicoMasActivo);
+        this.getContentPane().add(txtTecnicoMasActivo);
+        this.getContentPane().add(lbTecnicoMasInactivo);
+        this.getContentPane().add(txtTecnicoMasInactivo);
+        this.getContentPane().add(btCerrar);
+
+        this.setVisible(true); // hacemos visible la ventana
     
     }
     // FIN DEL CONSTRUCTOR
