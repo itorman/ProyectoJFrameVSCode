@@ -3,31 +3,28 @@ import java.util.ArrayList;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
-import javax.swing.plaf.FontUIResource;
-
 import java.awt.Font;
 
 
 public class VentanaPrincipal extends JFrame implements ActionListener {
     
     //atributos
-    //private JFrame ventanaAsignacion; // hace falta esto???
     private JTextField txtDescripcion;
     private JTextField txtFechaCreacion;
     private Incidencia actual;
+    private Tecnico tecnicoActual ;
 
     
     // componentes de la interfaz gráfica
     private JLabel lbIncidencias;
-    private JComboBox<String> cbIncidencias;
+    private JComboBox<Incidencia> cbIncidencias;
     private JLabel lbTecnicos;
-    private JComboBox<String> cbTecnicos;
+    private JComboBox<Tecnico> cbTecnicos;
     private JLabel lbinfoIncidencia;
     private JButton btInformes;
 
@@ -46,12 +43,9 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
     // incidencias y tecnicos    
     ArrayList<Tecnico> tecnicos = new ArrayList<Tecnico>();	
     ArrayList<Incidencia> incidencias = new ArrayList<Incidencia>();
-    // resto atributos
-    //ventana informe
-    private VentanaInforme ventanaInforme;
     
 
-    // constructorque crea la ventana principal
+    // constructor que crea la ventana principal
     public VentanaPrincipal() {
 
         super("Ventana asignacion de incidencias");
@@ -67,7 +61,8 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
         incidencias.add(new Incidencia("IC003", "Problema en Sharepoint", "07/04/2021", "Cerrada", tecnico1, 120));
         incidencias.add(new Incidencia("IC004", "Problema en Sharepoint", "08/04/2021", "Abierta", null, 0));
         incidencias.add(new Incidencia("IC005", "Problema en Adobe", "07/04/2021", "Abierta", null, 0));
-
+        // la incidencia por defecto es la primera
+        //Incidencia actual = incidencias.get(0);
         // inicializo con un metodo propio llamado init. este seria parte del constructor
         initComponentes();
     }
@@ -76,26 +71,20 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
         
         
         // inicio la incidencia actual que se mostrara en la ventana
-        actual = incidencias.get(0);
-        // creo la ventana principal
-        //ventanaAsignacion = new JFrame("Panel de asignacion de incidencias");
-        //ventanaAsignacion.setLocationRelativeTo(null);setVisible(true); // hacemos visible la ventana
-        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        this.setSize(900, 500);
-        //ventanaAsignacion.setBounds(100, 100, 677, 497);
-        //ventanaAsignacion.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
-         
+        // creo la ventana principal
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.setSize(1150, 300);
+             
         // Incidencias
         lbIncidencias = new JLabel("Incidencias");
         lbIncidencias.setFont(new Font("Tahoma", Font.BOLD, 14));
-       
-        cbIncidencias = new JComboBox<String>();
+        cbIncidencias = new JComboBox<Incidencia>();
         cbIncidencias.setFont(new Font("Tahoma", Font.PLAIN, 10));
-        cbIncidencias.addItem("Seleccione una incidencia");
+        
         // añado las incidencias al combobox
         for (Incidencia incidencia : incidencias) {
-            cbIncidencias.addItem(incidencia.getId());
+            cbIncidencias.addItem(incidencia);
         }
         // añado el listener al combobox
         cbIncidencias.addActionListener(this);
@@ -103,12 +92,14 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
         // Tecnicos
         lbTecnicos = new JLabel("Tecnicos");
         lbTecnicos.setFont(new Font("Tahoma", Font.BOLD, 14));
-        cbTecnicos = new JComboBox<String>();
+        
+        
+        cbTecnicos = new JComboBox<Tecnico>();
         cbTecnicos.setFont(new Font("Tahoma", Font.PLAIN, 10));
-        cbTecnicos.addItem("Seleccione un tecnico");
+        //cbTecnicos.addItem("Seleccione un tecnico");
         // añado los tecnicos al combobox
         for (Tecnico tecnico : tecnicos) {
-            cbTecnicos.addItem(tecnico.getNombre());
+            cbTecnicos.addItem(tecnico);
         }
         // añado el listener al combobox
         cbTecnicos.addActionListener(this);
@@ -129,7 +120,7 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
         txtDescripcion = new JTextField();
         txtDescripcion.setEditable(false);
         txtDescripcion.setFont(new Font("Tahoma", Font.PLAIN, 10));
-        txtDescripcion.setColumns(15);
+        txtDescripcion.setColumns(20);
         //txtDescripcion.setText(actual.getDescripcion());  --debo establecer aqui? u en otro sitio
 
         // Fecha de creacion
@@ -237,25 +228,67 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
         Object o = e.getSource();
 
         if (o.equals(cbIncidencias)) {
-            System.out.println("Selecciono incidencia");
-
+            // Se ha pulsado el combo de incidencias
+            // Selecciono una incidencia
+            actual = (Incidencia) cbIncidencias.getSelectedItem();
+            // Actualizo los campos de texto
+            txtDescripcion.setText(actual.getDescripcion());
+            txtFechaCreacion.setText(actual.getFechaCreacion().toString());
+            if (actual.getTecnico() == null) {
+                txtTecnico.setText("");                
+            }
+            else {
+                txtTecnico.setText(actual.getTecnico().getNombre());                
+            }         
+            txtEstado.setText(actual.getEstado());
+            int tiempo = actual.getTiempoResolucion();
+            if (tiempo == 0) {
+                txtTiempoResolucion.setText("");
+            } else txtTiempoResolucion.setText(Integer.toString(tiempo));
+            
+            
         } else if (o.equals(cbTecnicos)) {
-            System.out.println("Selecciono tecnico");
+            // Se ha pulsado el combo de tecnicos
+            // Selecciono un tecnico
+            tecnicoActual = (Tecnico) cbTecnicos.getSelectedItem();
+            
 
         } else if (o.equals(btInformes)) {
             System.out.println("Entro a ventana informes");
+            // Creo la ventana de informes
+            VentanaInforme ventanaInforme = new VentanaInforme(tecnicos, incidencias);
+            
+
 
         } else if (o.equals(txtEstado)) {
+            // Se ha pulsado el campo de estado
             System.out.println("Actualizo");
 
         } else if (o.equals(txtTiempoResolucion)) {
-            System.out.println("Asigno tecnico");
+            // Se ha pulsado el campo de tiempo de resolucion
+            System.out.println("Asignado tiempo de resolucion");
+            
 
         } else if (o.equals(btActualizar)) {
             System.out.println("Actualizo");
+            String tiempoString;
+            int tiempo;
+            tiempoString = txtTiempoResolucion.getText();
+            // convertir tiempoString a int
+            try {
+                tiempo = Integer.parseInt(tiempoString);
+            } catch (NumberFormatException e1) {
+                tiempo = 0;
+            }
+            // Actualizo el tiempo de resolucion de la incidencia
+            actual.setTiempoResolucion(tiempo);
+            actual.setEstado("Cerrada");
 
         } else if (o.equals(btAsignar)) {
-            System.out.println("Asigno");
+            //  Asigno el tecnico a la incidencia
+            System.out.println("Asigno tecnico");
+            actual.setTecnico(tecnicoActual);
+            txtTecnico.setText(actual.getTecnico().getNombre());
 
         } else if (o.equals(btCancelar)) {
             System.out.println("Cancelo");

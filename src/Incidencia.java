@@ -97,6 +97,13 @@ public class Incidencia {
     public int getTiempoResolucion() {
         return tiempoResolucion;
     }
+
+     /**
+     * @param estado the estado to set
+     */
+    public void setTiempoResolucion(int tiempo) {
+        this.tiempoResolucion = tiempo;
+    }
     /* (non-Javadoc)
      * @see java.lang.Object#toString()
      */

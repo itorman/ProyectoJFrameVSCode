@@ -12,9 +12,6 @@ import java.awt.Font;
 public class VentanaInforme extends JFrame implements ActionListener {
     
     //atributos
-    //private JFrame ventanaInforme;
-    // incidencias y tecnicos pasados desde ventana principal
-    private VentanaPrincipal ventanaPrincipal;
     ArrayList<Tecnico> tecnicos = new ArrayList<Tecnico>();	
     ArrayList<Incidencia> incidencias = new ArrayList<Incidencia>();
 
@@ -37,11 +34,10 @@ public class VentanaInforme extends JFrame implements ActionListener {
     
     private JButton btCerrar;
 
-    // constructorque crea la ventana de informes
-    public VentanaInforme() {
-        //super("Aplicacion para asignación de incidencias a tecnicos");  --> no es necesario
-        super("Ventana de informes");       
-        initComponentes();
+    // constructorque crea la ventana de informes. Recibe por parametro los arrays de tecnicos y incidencias
+    public VentanaInforme(ArrayList<Tecnico> tecnicos, ArrayList<Incidencia> incidencias) {
+         super("Ventana de informes");       
+         initComponentes();
     }
 
     public void initComponentes() {
@@ -53,7 +49,7 @@ public class VentanaInforme extends JFrame implements ActionListener {
         //this.setDefaultCloseOperation(EXIT_ON_CLOSE); // ?? aqui ??
         this.setSize(700, 400);
         // Posicionamos la ventana en la pantalla
-        this.setLocationRelativeTo(null);
+        //this.setLocationRelativeTo(null);
         
         
 
@@ -126,9 +122,55 @@ public class VentanaInforme extends JFrame implements ActionListener {
         this.getContentPane().add(btCerrar);
 
         this.setVisible(true); // hacemos visible la ventana
-    
+        
+
+        // Calculamos los datos de los informes
+        calcularInformes(tecnicos, incidencias);
     }
     // FIN DEL CONSTRUCTOR
+
+    // Método que calcula los datos de los informes
+    public void calcularInformes(ArrayList tecnicos, ArrayList incidencias) {
+        // Calculamos el porcentaje de incidencias cerradas
+        int numIncidenciasCerradas = 0;
+        int numIncidenciasAbiertas = 0;
+        int numIncidenciasEnProgreso = 0;
+        int numIncidencias = incidencias.size();
+        for (int i = 0; i < numIncidencias; i++) {
+            Incidencia incidencia = (Incidencia) incidencias.get(i);
+            if (incidencia.getEstado().equals("Cerrada")) {
+                numIncidenciasCerradas++;
+            } else if (incidencia.getEstado().equals("Abierta")) {
+                numIncidenciasAbiertas++;
+            } else if (incidencia.getEstado().equals("En progreso")) {
+                numIncidenciasEnProgreso++;
+            }
+        }
+        double porcentajeIncidenciasCerradas = (double) (numIncidenciasCerradas / numIncidencias) * 100;
+        txtIncidenciasCerradas.setText(String.format("%.2f", porcentajeIncidenciasCerradas));
+
+        // Calculamos el porcentaje de incidencias abiertas
+        double porcentajeIncidenciasAbiertas = (double) (numIncidenciasAbiertas / numIncidencias) * 100;
+        txtIncidenciasAbiertas.setText(String.format("%.2f", porcentajeIncidenciasAbiertas));
+
+        // Calculamos el porcentaje de incidencias en progreso
+        double porcentajeIncidenciasEnProgreso = (double) (numIncidenciasEnProgreso / numIncidencias) * 100;
+        txtIncidenciasEnProgreso.setText(String.format("%.2f", porcentajeIncidenciasEnProgreso));
+
+        // Calculamos el tiempo medio de resolución
+        double tiempoMedioResolucion = 0;
+        for (int i = 0; i < numIncidencias; i++) {
+            Incidencia incidencia = (Incidencia) incidencias.get(i);
+            tiempoMedioResolucion += incidencia.getTiempoResolucion();
+        }
+        tiempoMedioResolucion = tiempoMedioResolucion / numIncidencias;
+        txtTiempoMedioResolucion.setText(String.format("%.2f", tiempoMedioResolucion));
+
+        // Calculamos el técnico más activo
+       
+        
+        
+    }
 
     // INICIO MANEJADOR DE EVENTOS
 
