@@ -14,12 +14,14 @@ import java.awt.Font;
 public class VentanaPrincipal extends JFrame implements ActionListener {
     
     //atributos
-    private JTextField txtDescripcion;
-    private JTextField txtFechaCreacion;
     private Incidencia actual;
-    private Tecnico tecnicoActual ;
-
+    private Tecnico tecnicoActual;
+    private VentanaInforme ventanaInforme;
     
+     // incidencias y tecnicos    
+    ArrayList<Tecnico> tecnicos = new ArrayList<Tecnico>();	
+    ArrayList<Incidencia> incidencias = new ArrayList<Incidencia>();
+      
     // componentes de la interfaz gráfica
     private JLabel lbIncidencias;
     private JComboBox<Incidencia> cbIncidencias;
@@ -27,6 +29,9 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
     private JComboBox<Tecnico> cbTecnicos;
     private JLabel lbinfoIncidencia;
     private JButton btInformes;
+
+    private JTextField txtDescripcion;
+    private JTextField txtFechaCreacion;
 
     private JLabel lbDescripcion;   
     private JLabel lbFechaCreacion;
@@ -40,11 +45,7 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
     private JButton btActualizar;
     private JButton btAsignar;
     private JButton btCancelar;
-    // incidencias y tecnicos    
-    ArrayList<Tecnico> tecnicos = new ArrayList<Tecnico>();	
-    ArrayList<Incidencia> incidencias = new ArrayList<Incidencia>();
-    
-
+   
     // constructor que crea la ventana principal
     public VentanaPrincipal() {
 
@@ -67,7 +68,7 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
         initComponentes();
     }
 
-    public void initComponentes() {
+    private void initComponentes() {
         
         
         // inicio la incidencia actual que se mostrara en la ventana
@@ -170,9 +171,13 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
         //añado el listener al boton actualizar
         btActualizar.addActionListener(this);
 
-        // Boton de asignar
+        // Boton de asignar 
         btAsignar = new JButton("Asignar");
+        // desactivado por defecto
+        btAsignar.setEnabled(false);
         btAsignar.setFont(new Font("Tahoma", Font.ITALIC, 14));
+        // activo si la incidencia no tiene tecnico asignado
+        
         //añado el listener al boton asignar
         btAsignar.addActionListener(this);
 
@@ -235,7 +240,8 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
             txtDescripcion.setText(actual.getDescripcion());
             txtFechaCreacion.setText(actual.getFechaCreacion().toString());
             if (actual.getTecnico() == null) {
-                txtTecnico.setText("");                
+                txtTecnico.setText("");
+                btAsignar.setEnabled(true);               
             }
             else {
                 txtTecnico.setText(actual.getTecnico().getNombre());                
@@ -256,19 +262,8 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
         } else if (o.equals(btInformes)) {
             System.out.println("Entro a ventana informes");
             // Creo la ventana de informes
-            VentanaInforme ventanaInforme = new VentanaInforme(tecnicos, incidencias);
+            ventanaInforme = new VentanaInforme(tecnicos, incidencias);
             
-
-
-        } else if (o.equals(txtEstado)) {
-            // Se ha pulsado el campo de estado
-            System.out.println("Actualizo");
-
-        } else if (o.equals(txtTiempoResolucion)) {
-            // Se ha pulsado el campo de tiempo de resolucion
-            System.out.println("Asignado tiempo de resolucion");
-            
-
         } else if (o.equals(btActualizar)) {
             System.out.println("Actualizo");
             String tiempoString;
@@ -292,11 +287,11 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 
         } else if (o.equals(btCancelar)) {
             System.out.println("Cancelo");
+            dispose();
 
         } else {
             System.out.println("Error de algun tipo");
         }
-
     }
     
 }
